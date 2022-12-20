@@ -5,5 +5,5 @@
 // Generated on: 2015.05.25 at 04:21:01 PM EDT 
 //
 
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://spring.io/guides/gs-producing-web-service", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://progress.bg/web-service", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package com.progress.model;
