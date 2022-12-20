@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New/Edit Contact</title>
+</head>
+<body>
+<div align="center">
+    <h1>New/Edit Contact</h1>
+    <form th:action="@{/saveContact}" th:method="post" th:object="${contact}">
+        <table>
+            <input type="hidden" th:field="*{id}"/>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" th:field="*{email}"/></td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td><input type="text" th:field="*{address}"/></td>
+            </tr>
+            <tr>
+                <td>Telephone:</td>
+                <td><input type="text" th:field="*{telephone}"/></td>
+            </tr>
+            <tr>
+                <td>Contact Group:</td>
+                <td>
+                    <select class="form-control" th:field="*{groupId}">
+                        <option th:each="group : ${contactGroups}"
+                                th:value="${group.id}"
+                                th:text="${group.groupName}"
+                                th:selected="${group.id==contact.groupId}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Save"></td>
+            </tr>
+            <tr>
+                <td colspan="2"> <span style="color:red;">
+                    <label th:text="${message}"/></span></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

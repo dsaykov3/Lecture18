@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Manager Home</title>
+</head>
+<body>
+<div align="center">
+    <h1 th:text="#{welcome.message}"/>
+
+    <form  th:action="@{/find}" th:method="post">
+        Search By: <input type="text" name="searhTerm" th:value="${searhTerm}">
+        <input type="submit" value="Search">
+    </form>
+    <h3><a href="newContact">New Contact</a></h3>
+    <table border="1">
+        <th>No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Telephone</th>
+        <th>Contact Group</th>
+        <th>Action</th>
+        <tr th:each="contact,iter: ${listContact}">
+            <td th:text="${iter.index + 1}"/>
+            <td th:text="${contact.name}"/>
+            <td th:text="${contact.email}"/>
+            <td th:text="${contact.address}"/>
+            <td th:text="${contact.telephone}"/>
+            <td th:text="${contact.group.groupName}"/>
+            <td>
+                <a th:href="@{editContact(id=${contact.id})}">Edit</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:href="@{deleteContact(id=${contact.id})}">Delete</a>
+            </td>
+
+        </tr>
+    </table>
+    <div th:if="${principal != null}">
+        <h2>
+            Welcome : <span th:text="${principal.name}"/> |
+            <a th:href="@{/logout}"> Logout</a>
+        </h2>
+    </div>
+</div>
+</body>
+</html>
