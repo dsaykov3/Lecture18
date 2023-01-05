@@ -24,7 +24,7 @@ public class Contact implements Serializable {
     @XmlElement(required = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_id")
-    private int id;
+    private Integer id;
     @XmlElement(required = true)
     @Column(name = "name")
     private String name;
@@ -53,11 +53,11 @@ public class Contact implements Serializable {
         this.telephone = telephone;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -116,5 +116,22 @@ public class Contact implements Serializable {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contact contact = (Contact) o;
+
+        if (id != contact.id) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        return result;
     }
 }
