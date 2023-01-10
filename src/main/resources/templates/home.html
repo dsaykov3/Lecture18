@@ -41,7 +41,7 @@
                 <a th:href="@{deleteContact(id=${contact.id})}">Delete</a>
 
                 <a th:href="@{addContactToCart(id=${contact.id})}">Add to cart</a>
-                <img th:src="@{'/image/'+${contact.telephone}}"/>
+                <img th:src="@{'/image/'+${contact.telephone}}" style="width:200px;"/>
             </td>
 
         </tr>

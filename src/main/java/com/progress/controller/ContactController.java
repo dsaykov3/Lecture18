@@ -2,6 +2,7 @@ package com.progress.controller;
 
 import com.progress.model.Contact;
 import com.progress.service.ContactService;
+import com.progress.service.EmailService;
 import com.progress.service.ShoppingCartService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class ContactController {
     ContactService contactService;
 
     @Autowired
+    EmailService emailService;
+
+
+    @Autowired
     private WebServiceTemplate webServiceTemplate;
 
     @RequestMapping(value = "/")
@@ -53,6 +58,7 @@ public class ContactController {
         model.addObject("cart", shoppingCart.getCart());
         model.setViewName("cart");
 
+        emailService.sendSimpleMail();
         return model;
     }
 
@@ -62,6 +68,18 @@ public class ContactController {
         model.addObject("listContact", listContacts);
         model.addObject("searhTerm", searhTerm);
         model.addObject("principal", principal);
+        model.addObject("cart", shoppingCart.getCart());
+        model.setViewName("home");
+        return model;
+    }
+
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public ModelAndView findContactGet(@RequestParam("searhTerm") String searhTerm, ModelAndView model, Principal principal) throws IOException {
+        List<Contact> listContacts = contactService.findBySearchTerm(searhTerm);
+        model.addObject("listContact", listContacts);
+        model.addObject("searhTerm", searhTerm);
+        model.addObject("principal", principal);
+        model.addObject("cart", shoppingCart.getCart());
         model.setViewName("home");
         return model;
     }
